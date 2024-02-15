@@ -1,5 +1,6 @@
 import Nav from "./components/Nav"
 import Home from "./components/section/Home"
+import Info from "./components/section/Info"
 
 function App() {
 
@@ -7,6 +8,7 @@ function App() {
     <>
       <Nav />
       <Home />
+      <Info />
     </>
   )
 }
