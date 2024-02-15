@@ -11,7 +11,8 @@ const port = process.env.PORT || 3060; // Obtener el PORT desde las variables de
 app.set('port', port); // Establecer el puerto
 
 // Rutas de la app
-app.use('/', require('./routes/index'));
+app.use('/user', require('./routes/admins.routes'));
+app.use('/products', require('./routes/products.routes'));
 
 // Definir la ruta para mostrar las imágenes
 app.use('/images', express.static(path.join(__dirname, '../static/images')));

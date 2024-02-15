@@ -1,6 +1,6 @@
 const app = require('./app'); // Importamos app
 require('dotenv').config(); // Para acceder a las variables de entorno
-
+require('../config/connection');
 
 // Levantar el servidor
 async function startServer() {
