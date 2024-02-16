@@ -6,6 +6,7 @@ export function ContextoProvider(props) {
 
     const [categorias, setCategorias] = useState(['Computacion', 'Electronica', 'Mobile']);
     const [productos, setProductos] = useState([]);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         cargarStore()
@@ -16,6 +17,7 @@ export function ContextoProvider(props) {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                'Authorization': 'BEARER ' + props.token
             },
         })
             .then((response) => response.json())
@@ -30,10 +32,17 @@ export function ContextoProvider(props) {
             });
     }
 
+    function guardarProducto(producto) {
+        setProductos([...productos, producto])
+    }
+
     return (
         <Contexto.Provider value={{
             productos,
-            categorias
+            categorias,
+            showModal,
+            setShowModal,
+            guardarProducto
             }}>
             {props.children}
         </Contexto.Provider>

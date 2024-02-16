@@ -1,20 +1,22 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import perfil from '../assets/perfil.png'
 import { IoCloseSharp, IoMenu } from "react-icons/io5";
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
+import { Contexto } from '../context/Context';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-function Nav({ token, setToken}) {
+function Nav({ token, setToken }) {
+
+    const {setShowModal} = useContext(Contexto)
 
     const links = [
         { href: '#', texto: 'Home' },
         { href: '#', texto: 'Inventario' },
-        { href: '#', texto: 'Contacto' },
-        { href: '#', texto: 'Agregar' }
+        { href: '#', texto: 'Contacto' }
     ]
 
     const [menu, setMenu] = useState(false);
@@ -129,6 +131,14 @@ function Nav({ token, setToken}) {
                                     <a href={link.href} className="block py-2 px-3 rounded hover:text-primario hover:bg-gray-100 lg:hover:bg-transparent transition-all duration-500">{link.texto}</a>
                                 </li>
                             ))}
+                            <li>
+                                <button className="block py-2 px-3 rounded hover:text-primario hover:bg-gray-100 lg:hover:bg-transparent transition-all duration-500"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setShowModal(true)
+                                }}
+                                >Agregar</button>
+                            </li>
                         </ul>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ import Info from "./components/section/Info"
 import Inventario from "./components/section/Inventario"
 import Login from "./components/Login"
 import { ContextoProvider } from "./context/Context"
+import Formulario from "./components/modal/Formulario"
 
 function App() {
 
@@ -16,10 +17,11 @@ function App() {
   } else {
     return (
       <>
-        <ContextoProvider>
+        <ContextoProvider token={token}>
           <Nav token={token} setToken={setToken}/>
   
           <main>
+            <Formulario token={token} />
             <Home />
             <Info />
   

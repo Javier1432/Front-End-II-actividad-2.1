@@ -1,11 +1,14 @@
+import { useContext } from "react"
 import Busqueda from "../Busqueda"
 import Filtrado from "../Filtrado"
 import Paginacion from "../Paginacion"
 import Tarjetas from "../Tarjetas"
+import { Contexto } from "../../context/Context"
 
 
 function Inventario() {
 
+    const {productos} = useContext(Contexto)
 
     return (
         <>
@@ -17,8 +20,10 @@ function Inventario() {
                     <Filtrado />
                 </div>
 
-                <div>
-                    <Tarjetas />
+                <div className="flex flex-col gap-8">
+                    {productos.map((producto) => (
+                        <Tarjetas producto={producto} />
+                    ))}
                 </div>
 
                 <Paginacion />

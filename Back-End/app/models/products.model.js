@@ -9,7 +9,7 @@ class ProductsModel {
     try {
       const response = await query(sql, values);
       const newProductId = response.insertId;
-      return newProductId;
+      return ({newProductId, imagen});
     } catch (error) {
       console.log("Hubo un error al crear el producto:", error);
       throw error;

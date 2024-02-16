@@ -16,7 +16,7 @@ class ProductsController {
       const newProduct = { nombre, imagen, descripcion, precio, cantidad, categoria };
       const newProductId = await productosModel.add(newProduct);
 
-      res.status(201).json({ status: 201, message: 'Producto creada exitosamente.', data: { id: newProductId } });
+      res.status(201).json({ status: 200, message: 'Producto creada exitosamente.', data: newProductId });
     } catch (error) {
       res.status(500).json({ status: 500, message: `Error al crear el producto: ${error.message}` });
     }
