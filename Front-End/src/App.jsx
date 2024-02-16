@@ -1,25 +1,36 @@
+import { useState } from "react"
 import Footer from "./components/Footer"
 import Nav from "./components/Nav"
 import Home from "./components/section/Home"
 import Info from "./components/section/Info"
 import Inventario from "./components/section/Inventario"
+import Login from "./components/Login"
+import { ContextoProvider } from "./context/Context"
 
 function App() {
 
-  return (
-    <>
-      <Nav />
-      
-      <main>
-        <Home />
-        <Info />
+  const [token, setToken] = useState('')
 
-        <Inventario />
-      </main>
-
-      <Footer />
-    </>
-  )
+  if (token == '') {
+    return (<Login setToken={setToken} />)
+  } else {
+    return (
+      <>
+        <ContextoProvider>
+          <Nav />
+  
+          <main>
+            <Home />
+            <Info />
+  
+            <Inventario />
+          </main>
+  
+          <Footer />
+        </ContextoProvider>
+      </>
+    )
+  }
 }
 
 export default App

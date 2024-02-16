@@ -19,6 +19,10 @@ export default {
         Roboto: ['Roboto', 'sans-serif'],
         Merriweather: ["Merriweather", 'serif'],
         Montserrat: ["Montserrat", 'sans-serif']
+      },
+      backgroundImage: {
+        'fondito': "url('./src/assets/bg.png')",
+        'lateral': "url('./src/assets/lateral.png')",
       }
     },
   },

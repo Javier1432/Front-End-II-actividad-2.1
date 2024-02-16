@@ -1,12 +1,13 @@
 import { IoSearchSharp } from "react-icons/io5";
-import {useState } from "react";
+import {useContext, useState } from "react";
+import { Contexto } from "../context/Context";
 
 function Filtrado({ setInventario }) {
 
+    const {categorias} = useContext(Contexto)
+
     const [filtrado, setFiltrado] = useState('');
     const [estante, setEstante] = useState('');
-
-    const categorias = ['Computacion']
 
     const cargarFiltrado = () => {
 
@@ -29,11 +30,9 @@ function Filtrado({ setInventario }) {
                             <option value="">Todos</option>
                             {
                                 categorias.map((categoria, indice) => (
-                                    <option key={indice} value={categoria.nombre}>Categoria {categoria.nombre}</option>
+                                    <option key={indice} value={categoria}>{categoria}</option>
                                 ))
                             }
-                            <option value="Bs">Precio en Bolívares</option>
-                            <option value="$">Precio en Dólares</option>
                         </select>
                         <button type="submit" onClick={(e) => {
                             cargarFiltrado()
