@@ -17,7 +17,7 @@ function App() {
     return (
       <>
         <ContextoProvider>
-          <Nav />
+          <Nav token={token} setToken={setToken}/>
   
           <main>
             <Home />

@@ -1,8 +1,14 @@
 import { useState } from 'react'
 import perfil from '../assets/perfil.png'
 import { IoCloseSharp, IoMenu } from "react-icons/io5";
+import { Fragment } from 'react'
+import { Disclosure, Menu, Transition } from '@headlessui/react'
 
-function Nav({ showModal, setShowModal }) {
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+}
+
+function Nav({ token, setToken}) {
 
     const links = [
         { href: '#', texto: 'Home' },
@@ -13,6 +19,28 @@ function Nav({ showModal, setShowModal }) {
 
     const [menu, setMenu] = useState(false);
 
+    function logout() {
+        fetch("http://localhost:3000/user/logout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': 'BEARER ' + token
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.status === 200) {
+                    console.log(data)
+                    setToken('')
+                } else if (data.status === 400) {
+                    alert('tenemos un error')
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+    }
+
     return (
         <>
             <nav className="bg-blanco h-[10vh]">
@@ -21,13 +49,66 @@ function Nav({ showModal, setShowModal }) {
                         <span className="self-center text-4xl font-bold whitespace-nowrap text-primario font-Montserrat">SkyBlue</span>
                     </a>
                     <div className="flex items-center lg:order-2 space-x-3 lg:space-x-0 rtl:space-x-reverse">
-                        <button type="button" className="flex text-sm rounded-full text-primario invisible lg:visible" onClick={
-                            (e) => {
-                                info('info', 'Proximamente tendremos registro de usuarios', 'Seccion de Usuario')
-                            }
-                        }>
-                            <span className="sr-only">Open user menu</span>
-                            <img className="w-8 h-8 rounded-full visible" src={perfil} alt="user photo" />
+                        <button type="button" className="flex text-sm rounded-full text-primario invisible lg:visible">
+                            {/* Profile dropdown */}
+                            <Menu as="div" className="relative ml-3">
+                                <div>
+                                    <Menu.Button className="relative flex rounded-full text-sm focus:outline-none">
+                                        <span className="absolute -inset-1.5" />
+                                        <span className="sr-only">Open user menu</span>
+                                        <img
+                                            className="h-8 w-8 rounded-full"
+                                            src={perfil}
+                                            alt=""
+                                        />
+                                    </Menu.Button>
+                                </div>
+                                <Transition
+                                    as={Fragment}
+                                    enter="transition ease-out duration-100"
+                                    enterFrom="transform opacity-0 scale-95"
+                                    enterTo="transform opacity-100 scale-100"
+                                    leave="transition ease-in duration-75"
+                                    leaveFrom="transform opacity-100 scale-100"
+                                    leaveTo="transform opacity-0 scale-95"
+                                >
+                                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                        <Menu.Item>
+                                            {({ active }) => (
+                                                <a
+                                                    href="#"
+                                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                >
+                                                    Your Profile
+                                                </a>
+                                            )}
+                                        </Menu.Item>
+                                        <Menu.Item>
+                                            {({ active }) => (
+                                                <a
+                                                    href="#"
+                                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                >
+                                                    Settings
+                                                </a>
+                                            )}
+                                        </Menu.Item>
+                                        <Menu.Item>
+                                            {({ active }) => (
+                                                <span
+                                                    onClick={(e) => {
+                                                        e.preventDefault()
+                                                        logout()
+                                                    }}
+                                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                >
+                                                    Sign out
+                                                </span>
+                                            )}
+                                        </Menu.Item>
+                                    </Menu.Items>
+                                </Transition>
+                            </Menu>
                         </button>
                         <button type="button" className="inline-flex items-center p-2 w-12 h-12 justify-center text-sm text-primario rounded-lg lg:hidden hover:text-primario hover:bg-opaco focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all duration-200" onClick={() => {
                             setMenu(true)

@@ -39,15 +39,15 @@ function InicioSesion({ setToken }) {
         <>
             <div className="flex flex-col gap-8 items-center justify-center w-full">
                 <h1 className=" text-blanco text-4xl font-Montserrat font-bold">Login</h1>
-                <form action="" className="w-full px-16 flex flex-col gap-4">
+                <form action="" className="w-full p-4 md:px-16 flex flex-col gap-4">
                     <div className="w-full">
                         <label htmlFor="usuario"
-                            className="text-blanco text-xl font-Merriweather font-bold"
+                            className="text-blanco text-md md:text-xl font-Merriweather font-bold"
                         >Usuario</label>
                         <input type="text"
                             name="usuario"
                             id="usuario"
-                            className="block px-2 w-full text-lg text-blanco bg-transparent border-0 border-b-2 border-blanco appearance-none focus:outline-none"
+                            className="block px-2 w-full text-sm md:text-lg text-blanco bg-transparent border-0 border-b-2 border-blanco appearance-none focus:outline-none"
                             placeholder=""
                             value={usuario}
                             onChange={e => { setUsuario(e.target.value) }}
@@ -55,12 +55,12 @@ function InicioSesion({ setToken }) {
                     </div>
                     <div className="w-full">
                         <label htmlFor="password"
-                            className="text-blanco text-xl font-Merriweather font-bold"
+                            className="text-blanco text-md md:text-xl font-Merriweather font-bold"
                         >Contraseña</label>
                         <input type="password"
                             name="password"
                             id="password"
-                            className="block px-2 w-full text-lg text-blanco bg-transparent border-0 border-b-2 border-blanco appearance-none focus:outline-none"
+                            className="block px-2 w-full text-sm md:text-lg text-blanco bg-transparent border-0 border-b-2 border-blanco appearance-none focus:outline-none"
                             placeholder=""
                             value={password}
                             onChange={e => { setPassword(e.target.value) }}

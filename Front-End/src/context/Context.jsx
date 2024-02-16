@@ -21,7 +21,8 @@ export function ContextoProvider(props) {
             .then((response) => response.json())
             .then((data) => {
                 if (data.status === 200) {
-                    setProductos(data.data);
+                    console.log(data)
+                    setProductos(data.data.productos);
                 }
             })
             .catch((error) => {
