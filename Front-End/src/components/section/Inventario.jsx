@@ -1,6 +1,7 @@
 import Busqueda from "../Busqueda"
 import Filtrado from "../Filtrado"
 import Paginacion from "../Paginacion"
+import Tarjetas from "../Tarjetas"
 
 
 function Inventario() {
@@ -17,7 +18,7 @@ function Inventario() {
                 </div>
 
                 <div>
-
+                    <Tarjetas />
                 </div>
 
                 <Paginacion />
