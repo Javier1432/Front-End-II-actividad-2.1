@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { Contexto } from "../../context/Context";
+import { info } from "../../service/alerts";
 
 export default function Formulario({ token }) {
 
