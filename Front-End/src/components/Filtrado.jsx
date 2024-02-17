@@ -2,15 +2,20 @@ import { IoSearchSharp } from "react-icons/io5";
 import {useContext, useState } from "react";
 import { Contexto } from "../context/Context";
 
-function Filtrado({ setInventario }) {
+function Filtrado() {
 
-    const {categorias} = useContext(Contexto)
+    const {categorias, productos, setProductos} = useContext(Contexto)
 
     const [filtrado, setFiltrado] = useState('');
-    const [estante, setEstante] = useState('');
+    const [estante, setEstante] = useState(productos);
 
     const cargarFiltrado = () => {
+        if (filtrado.trim().length == 0) {
+            return setProductos(estante)
+        }
 
+        const nuevoInventario = estante.filter( producto => producto.categoria === filtrado)
+        return setProductos(nuevoInventario)
     }
 
     return (

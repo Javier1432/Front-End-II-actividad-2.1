@@ -65,7 +65,7 @@ class UsersController {
       // Agregar el token a la bd
       await tokensModel.add({ userId: admin.id, token });
 
-      res.status(200).json({ status: 200, message: 'Inicio de sesión exitoso.', token });
+      res.status(200).json({ status: 200, message: 'Inicio de sesión exitoso.', token, rol: admin.role });
     } catch (error) {
       res.status(500).json({ status: 500, message: `Error al iniciar sesión: ${error.message}` });
     }

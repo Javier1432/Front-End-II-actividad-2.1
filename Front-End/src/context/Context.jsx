@@ -8,6 +8,7 @@ export function ContextoProvider(props) {
     const [productos, setProductos] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [showModal2, setShowModal2] = useState(false);
+    const [rol, setRol] = useState('')
 
     useEffect(() => {
         cargarStore()
@@ -67,7 +68,9 @@ export function ContextoProvider(props) {
             deleteStore,
             setProductos,
             setShowModal2,
-            showModal2
+            showModal2,
+            rol,
+            setRol
         }}>
             {props.children}
         </Contexto.Provider>

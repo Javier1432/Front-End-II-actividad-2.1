@@ -5,7 +5,7 @@ import Editar from "./modal/Editar";
 
 function Tarjetas({ producto, token }) {
 
-    const { deleteStore, setShowModal2 } = useContext(Contexto)
+    const { deleteStore, setShowModal2, rol } = useContext(Contexto)
 
     return (
         <>  
@@ -33,7 +33,7 @@ function Tarjetas({ producto, token }) {
                     <div className='flex justify-center items-center'>
                         <h5 className='text-xl lg:text-2xl text-primario font-Montserrat font-bold w-full'>${producto.precio}</h5>
                         <button 
-                        className='w-[35%] md:w-[20%] border-none p-2 text-red-700 font-black text-md lg:text-lg'
+                        className={`w-[35%] md:w-[20%] border-none p-2 text-red-700 font-black text-md lg:text-lg ${rol === 'admin' ? 'visible' : 'invisible'}`}
                         onClick={(e) => {
                             e.preventDefault()
                             deleteStore(producto.id)
@@ -42,7 +42,7 @@ function Tarjetas({ producto, token }) {
                             Eliminar
                         </button>
                         <button 
-                        className={'w-[35%] md:w-[20%] border-none p-2 text-claro font-black text-md lg:text-lg'}
+                        className={`w-[35%] md:w-[20%] border-none p-2 text-claro font-black text-md lg:text-lg ${rol === 'admin' ? 'visible' : 'invisible'}`}
                         onClick={(e) => {
                             e.preventDefault()
                             setShowModal2(true)

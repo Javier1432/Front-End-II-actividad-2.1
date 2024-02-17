@@ -11,12 +11,12 @@ function classNames(...classes) {
 
 function Nav({ token, setToken }) {
 
-    const {setShowModal} = useContext(Contexto)
+    const {setShowModal, rol} = useContext(Contexto)
 
     const links = [
-        { href: '#', texto: 'Home' },
-        { href: '#', texto: 'Inventario' },
-        { href: '#', texto: 'Contacto' }
+        { href: '#home', texto: 'Home' },
+        { href: '#inventario', texto: 'Inventario' },
+        { href: '#contacto', texto: 'Contacto' }
     ]
 
     const [menu, setMenu] = useState(false);
@@ -59,7 +59,7 @@ function Nav({ token, setToken }) {
                                         <span className="absolute -inset-1.5" />
                                         <span className="sr-only">Open user menu</span>
                                         <img
-                                            className="h-8 w-8 rounded-full"
+                                            className="h-10 w-10 rounded-full"
                                             src={perfil}
                                             alt=""
                                         />
@@ -75,26 +75,6 @@ function Nav({ token, setToken }) {
                                     leaveTo="transform opacity-0 scale-95"
                                 >
                                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                        <Menu.Item>
-                                            {({ active }) => (
-                                                <a
-                                                    href="#"
-                                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                >
-                                                    Your Profile
-                                                </a>
-                                            )}
-                                        </Menu.Item>
-                                        <Menu.Item>
-                                            {({ active }) => (
-                                                <a
-                                                    href="#"
-                                                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                >
-                                                    Settings
-                                                </a>
-                                            )}
-                                        </Menu.Item>
                                         <Menu.Item>
                                             {({ active }) => (
                                                 <span
@@ -132,7 +112,7 @@ function Nav({ token, setToken }) {
                                 </li>
                             ))}
                             <li>
-                                <button className="block py-2 px-3 rounded hover:text-primario hover:bg-gray-100 lg:hover:bg-transparent transition-all duration-500"
+                                <button className={`block py-2 px-3 rounded hover:text-primario hover:bg-gray-100 lg:hover:bg-transparent transition-all duration-500 ${rol === 'admin' ? 'visible' : 'invisible'}`}
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setShowModal(true)

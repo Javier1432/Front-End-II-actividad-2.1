@@ -13,21 +13,23 @@ function App() {
   const [token, setToken] = useState('')
 
   if (token == '') {
-    return (<Login setToken={setToken} />)
+    return (<ContextoProvider>
+      <Login setToken={setToken} />
+    </ContextoProvider>)
   } else {
     return (
       <>
         <ContextoProvider token={token}>
-          <Nav token={token} setToken={setToken}/>
-  
+          <Nav token={token} setToken={setToken} />
+
           <main>
             <Formulario token={token} />
             <Home />
             <Info />
-  
+
             <Inventario token={token} />
           </main>
-  
+
           <Footer />
         </ContextoProvider>
       </>

@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { validacion } from "../../service/functions";
+import { Contexto } from "../../context/Context";
 
 function InicioSesion({ setToken }) {
+
+    const {setRol} = useContext(Contexto)
 
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
@@ -25,6 +28,7 @@ function InicioSesion({ setToken }) {
             .then((data) => {
                 if (data.status === 200) {
                     console.log(data)
+                    setRol(data.rol)
                     setToken(data.token)
                 } else if (data.status === 400) {
                     alert('tenemos un error')

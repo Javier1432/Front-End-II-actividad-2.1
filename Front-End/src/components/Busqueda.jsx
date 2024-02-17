@@ -1,15 +1,18 @@
 import { IoSearchSharp } from "react-icons/io5";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Contexto } from "../context/Context";
 
-function Busqueda({setInventario}) {
+function Busqueda() {
 
-    const [estante, setEstante] = useState([])
+    const {setProductos, productos} = useContext(Contexto)
+
+    const [estante, setEstante] = useState(productos)
 
     const autocompletado = (pal) => {
         let preguntame = estante
 
         if (pal.trim().length == 0) {
-            return setInventario(estante)
+            return setProductos(estante)
         }
     
         const nuevoInventario = []
@@ -23,6 +26,7 @@ function Busqueda({setInventario}) {
             }
         }
 
+        setProductos(nuevoInventario)
     }
 
     return (

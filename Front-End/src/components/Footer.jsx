@@ -10,7 +10,7 @@ function Footer() {
 
     return (
         <>
-            <footer className="w-full h-[25vh] flex flex-row p-4 bg-opaco">
+            <footer id="contacto" className="w-full h-[25vh] flex flex-row p-4 bg-opaco">
                 <div className="h-full lg:w-1/2 lg:flex justify-center hidden items-center border-r-2">
                     <h4 className="text-center text-6xl text-primario font-Montserrat font-bold">
                         SkyBlue
