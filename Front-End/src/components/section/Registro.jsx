@@ -30,9 +30,9 @@ function Registro({ setToken }) {
             .then((data) => {
                 if (data.status === 200) {
                     console.log(data)
-                    setToken(data.token)
+                    info('success', 'Te has registrado correctamente', 'Registro Completo')
                 } else if (data.status === 400) {
-                    alert('tenemos un error')
+                    info('error', 'hubo un error al registrarse', 'Registro Fallido')
                 }
             })
             .catch((error) => {

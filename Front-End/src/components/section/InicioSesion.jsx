@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { validacion } from "../../service/functions";
 import { Contexto } from "../../context/Context";
+import { info } from "../../service/alerts";
 
 function InicioSesion({ setToken }) {
 
@@ -30,9 +31,11 @@ function InicioSesion({ setToken }) {
                     console.log(data)
                     setRol(data.rol)
                     setToken(data.token)
+                    return info('success', 'Has iniciado sesion correctamente', 'Inicio de Sesion')
                 } else if (data.status === 400) {
-                    alert('tenemos un error')
+                    return info('error', 'Fallo el inicio de Sesion', 'Inicio Fallido')
                 }
+                info('error', 'Fallo el inicio de Sesion', 'Inicio Fallido')
             })
             .catch((error) => {
                 console.log(error)

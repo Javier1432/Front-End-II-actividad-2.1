@@ -47,6 +47,7 @@ export function ContextoProvider(props) {
                 if (data.status === 200) {
                     const nuevoInventario = productos.filter(producto => producto.id !== id)
                     setProductos(nuevoInventario)
+                    info('success', 'Se ha eliminado exitosamente el producto', 'Producto Eliminado')
                 }
             })
             .catch((error) => {

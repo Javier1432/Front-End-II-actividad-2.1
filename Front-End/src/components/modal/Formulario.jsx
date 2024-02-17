@@ -72,7 +72,7 @@ export default function Formulario({ token }) {
                         categoria: state.categoria,
                         imagen: data.data.imagen,
                     })
-
+                    info('success', 'Se ha agregado exitosamente el producto', 'Producto Agregado')
                 }
 
             })

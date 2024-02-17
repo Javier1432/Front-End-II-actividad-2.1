@@ -4,6 +4,7 @@ import { IoCloseSharp, IoMenu } from "react-icons/io5";
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Contexto } from '../context/Context';
+import { info } from '../service/alerts';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -34,6 +35,7 @@ function Nav({ token, setToken }) {
                 if (data.status === 200) {
                     console.log(data)
                     setToken('')
+                    info('success', 'Has cerrado sesion correctamente', 'Cierre de Sesion')
                 } else if (data.status === 400) {
                     alert('tenemos un error')
                 }

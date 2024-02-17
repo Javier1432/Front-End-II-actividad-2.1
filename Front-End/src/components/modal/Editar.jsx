@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Contexto } from "../../context/Context";
 import { editar } from "../../service/functions";
+import { info } from "../../service/alerts";
 
 export default function Editar({ token, producto }) {
 
@@ -65,6 +66,7 @@ export default function Editar({ token, producto }) {
                         categoria: state.categoria,
                     })
                     setProductos(nuevoInventario)
+                    info('success', 'Se ha editado exitosamente el producto', 'Edicion Completada')
                 }
 
             })
