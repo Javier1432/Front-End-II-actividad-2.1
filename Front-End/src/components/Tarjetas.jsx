@@ -1,10 +1,15 @@
 import { FaHeart } from "react-icons/fa";
-import Buttom from './Buttom';
+import { useContext } from "react";
+import { Contexto } from "../context/Context";
+import Editar from "./modal/Editar";
 
-function Tarjetas({ producto }) {
+function Tarjetas({ producto, token }) {
+
+    const { deleteStore, setShowModal2 } = useContext(Contexto)
 
     return (
-        <>
+        <>  
+            <Editar producto={producto} token={token} />
             <div className="w-full min-h-[300px] bg-white rounded-2xl border-solid border-negro border-[1px] flex-col md:flex-row flex items-center">
                 <div className="w-full md:w-1/3">
                     <img className='w-full md:h-[300px] rounded-tl-2xl rounded-tr-2xl md:rounded-tr-none md:rounded-bl-2xl border-negro border-[1px]' 
@@ -27,8 +32,24 @@ function Tarjetas({ producto }) {
 
                     <div className='flex justify-center items-center'>
                         <h5 className='text-xl lg:text-2xl text-primario font-Montserrat font-bold w-full'>${producto.precio}</h5>
-                        <Buttom texto={'Eliminar'} className={'w-[35%] md:w-[20%] border-none p-2 text-red-700 font-black text-md lg:text-lg'}/>
-                        <Buttom texto={'Editar'} className={'w-[35%] md:w-[20%] border-none p-2 text-claro font-black text-md lg:text-lg'}/>
+                        <button 
+                        className='w-[35%] md:w-[20%] border-none p-2 text-red-700 font-black text-md lg:text-lg'
+                        onClick={(e) => {
+                            e.preventDefault()
+                            deleteStore(producto.id)
+                        }}
+                        >
+                            Eliminar
+                        </button>
+                        <button 
+                        className={'w-[35%] md:w-[20%] border-none p-2 text-claro font-black text-md lg:text-lg'}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            setShowModal2(true)
+                        }}
+                        >
+                            Editar
+                        </button>
                     </div>
                 </div>
             </div>

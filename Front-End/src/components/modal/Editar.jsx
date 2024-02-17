@@ -1,30 +1,25 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Contexto } from "../../context/Context";
+import { editar } from "../../service/functions";
 
-export default function Formulario({ token }) {
+export default function Editar({ token, producto }) {
 
     const [state, setState] = useState({
-        nombre: "",
-        descripcion: "",
-        precio: "",
-        cantidad: "",
-        categoria: "",
+        nombre: producto.nombre,
+        descripcion: producto.descripcion,
+        precio: producto.precio,
+        cantidad: producto.cantidad,
+        categoria: producto.categoria,
         image: "",
     });
 
-    const { categorias, showModal, setShowModal, guardarProducto, producto } = useContext(Contexto)
+    useEffect(() => {
+        setState
+    }, [])
+
+    const { categorias, showModal2, setShowModal2, productos, setProductos } = useContext(Contexto)
 
     const error = undefined;
-
-    const validacion = () => {
-        let claves = Object.keys(state);
-        for (let i = 0; i < claves.length; i++) {
-            let clave = claves[i];
-            if (state[clave].trim() === '') {
-                return true
-            };
-        }
-    };
 
     const handleChange = (e) => {
         setState({
@@ -43,8 +38,6 @@ export default function Formulario({ token }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const error = validacion();
-
         if (error) {
             alert('Algún Campo es Inválido')
             return
@@ -52,8 +45,8 @@ export default function Formulario({ token }) {
 
         const formData = new FormData(e.currentTarget)
 
-        fetch(`http://localhost:3000/products`, {
-            method: 'POST',
+        fetch(`http://localhost:3000/products/${producto.id}`, {
+            method: 'PUT',
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -61,30 +54,20 @@ export default function Formulario({ token }) {
         })
             .then(response => response.json())
             .then(data => {
+
                 if (data.status === 200) {
-                    console.log(data)
-                    guardarProducto({
-                        id: data.data.newProductId,
+                    const nuevoInventario = editar(productos, {
+                        id: producto.id,
                         nombre: state.nombre,
                         descripcion: state.descripcion,
                         precio: state.precio,
                         cantidad: state.cantidad,
                         categoria: state.categoria,
-                        imagen: data.data.imagen,
                     })
-
+                    setProductos(nuevoInventario)
                 }
 
             })
-
-        setState({
-            nombre: "",
-            descripcion: "",
-            precio: "",
-            cantidad: "",
-            categoria: "",
-            image: "",
-        })
 
     };
 
@@ -93,7 +76,7 @@ export default function Formulario({ token }) {
     return (
         <>
 
-            {showModal ? (
+            {showModal2 ? (
                 <>
                     <div
                         className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
@@ -104,11 +87,11 @@ export default function Formulario({ token }) {
                                 {/*header*/}
                                 <div className="flex items-start justify-between px-5 py-10 w-[95%]  border-b-2 border-solid border-opaco rounded-t">
                                     <h3 className="text-4xl text-center font-Nunito font-bold text-primario w-full">
-                                        Agregar Producto
+                                        Editar Producto
                                     </h3>
                                     <button
                                         className="p-1 ml-auto bg-transparent border-0 text-negro font-Roboto float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                                        onClick={() => setShowModal(false)}
+                                        onClick={() => setShowModal2(false)}
                                     >
                                         x
                                     </button>
@@ -185,7 +168,7 @@ export default function Formulario({ token }) {
                                                 className="font-Roboto font-semibold text-lg md:text-xl text-blanco bg-primario rounded-xl py-2 px-8 mt-8"
                                                 disabled={error}
                                                 type="submit"
-                                            >Agregar Producto</button>
+                                            >Editar Producto</button>
                                         </div>
 
                                     </form>

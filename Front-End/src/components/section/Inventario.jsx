@@ -6,7 +6,7 @@ import Tarjetas from "../Tarjetas"
 import { Contexto } from "../../context/Context"
 
 
-function Inventario() {
+function Inventario({token}) {
 
     const {productos} = useContext(Contexto)
 
@@ -21,8 +21,8 @@ function Inventario() {
                 </div>
 
                 <div className="flex flex-col gap-8">
-                    {productos.map((producto) => (
-                        <Tarjetas producto={producto} />
+                    {productos.map((producto, id) => (
+                        <Tarjetas producto={producto} key={id} token={token} />
                     ))}
                 </div>
 

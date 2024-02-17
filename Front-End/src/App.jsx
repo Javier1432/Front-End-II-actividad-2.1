@@ -25,7 +25,7 @@ function App() {
             <Home />
             <Info />
   
-            <Inventario />
+            <Inventario token={token} />
           </main>
   
           <Footer />

@@ -7,6 +7,7 @@ export function ContextoProvider(props) {
     const [categorias, setCategorias] = useState(['Computacion', 'Electronica', 'Mobile']);
     const [productos, setProductos] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [showModal2, setShowModal2] = useState(false);
 
     useEffect(() => {
         cargarStore()
@@ -32,6 +33,26 @@ export function ContextoProvider(props) {
             });
     }
 
+    function deleteStore(id) {
+        fetch("http://localhost:3000/products/" + id, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': 'BEARER ' + props.token
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.status === 200) {
+                    const nuevoInventario = productos.filter(producto => producto.id !== id)
+                    setProductos(nuevoInventario)
+                }
+            })
+            .catch((error) => {
+                console.error(error)
+            });
+    }
+
     function guardarProducto(producto) {
         setProductos([...productos, producto])
     }
@@ -42,8 +63,12 @@ export function ContextoProvider(props) {
             categorias,
             showModal,
             setShowModal,
-            guardarProducto
-            }}>
+            guardarProducto,
+            deleteStore,
+            setProductos,
+            setShowModal2,
+            showModal2
+        }}>
             {props.children}
         </Contexto.Provider>
     )
