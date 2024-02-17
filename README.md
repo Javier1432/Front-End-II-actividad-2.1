@@ -11,3 +11,5 @@ Frontend:
 2-) Usamos el comando "npm install" para descargar todas las dependencias.
 3-) Usamos el comando "nom run dev" para correr el cliente.
 4-) Luego entramos al navegador y colocamos "http://localhost:5173" para que nos cargue la vista de la app.
+
+Nota: en cada carpeta tanto del servidor como del cliente, se necesitan variables de entorno, en las cuales se deben renombar y que se llamen ".env"
