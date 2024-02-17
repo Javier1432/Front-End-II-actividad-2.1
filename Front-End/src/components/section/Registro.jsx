@@ -1,6 +1,7 @@
 import { FaArrowRight } from "react-icons/fa";
 import { validacion } from "../../service/functions";
 import { useState } from "react";
+import { info } from "../../service/alerts";
 
 function Registro({ setToken }) {
 
@@ -30,9 +31,10 @@ function Registro({ setToken }) {
             .then((data) => {
                 if (data.status === 200) {
                     console.log(data)
-                    info('success', 'Te has registrado correctamente', 'Registro Completo')
+                    setToken(data.token)
+                    return info('success', 'Registro completado exitosamente', 'Registro Completado')
                 } else if (data.status === 400) {
-                    info('error', 'hubo un error al registrarse', 'Registro Fallido')
+                    return info('error', 'Registro ha fallado', 'Registro Inompletado')
                 }
             })
             .catch((error) => {
